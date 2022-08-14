@@ -1,0 +1,13 @@
+{
+	"compilerOptions": {
+		"baseUrl": "..",
+		"lib": [
+			"esnext",
+			"dom"
+		],
+		"module": "esnext",
+		"moduleResolution": "node",
+		"sourceMap": true,
+		"target": "esnext"
+	}
+}
