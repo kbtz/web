@@ -1,25 +1,36 @@
-/// <reference types="node" />
-const { NAME, MODE } = process.env
+const
+	web = __dirname,
+	name = process.env.NAME,
+	prefix = {
+		':': 'npm',
+		';': 'tsd',
+	}
 
-export default <import('npm/vite').UserConfig>{
+export default <import(':vite').UserConfig>{
+	root: web,
+	publicDir: `${name}/pub`,
+	cacheDir: '.git/run/vite',
 	build: {
 		rollupOptions: {
-			input: `${NAME}/index.html`
+			input: `${name}/index.html`
+		},
+		commonjsOptions: {
+			include: [/npm/, /tsd/]
 		}
 	},
-	cacheDir: '../.f/run/vite',
-	clearScreen: false,
-	publicDir: `${NAME}/pub`,
-	server: { host: NAME, port: 80 },
+	optimizeDeps: {
+		include: ['npm']
+	},
+	server: {
+		port: 80, host: 'web'
+	},
 	resolve: {
 		alias: [
 			{
-				find: /^([#@]?[a-z].*)/,
+				find: /^([:;]?[a-z].*)/,
 				replacement: '$1',
-				customResolver: (id) =>
-					__dirname + '/' + id
-						.replace(/^#/, 'npm/')
-						.replace(/^@/, 'tsd/')
+				customResolver: (id) => web + '/' +
+					id.replace(/^[:;]/, c => prefix[c] + '/')
 			},
 		]
 	}

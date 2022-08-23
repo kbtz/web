@@ -1,7 +1,7 @@
 {
 	"include": [
 		"**/ambient.d.ts",
-		"**/main.ts",
+		"*/main.ts",
 		"vite.config.ts"
 	],
 	"exclude": [
@@ -9,15 +9,15 @@
 		"tsd"
 	],
 	"compilerOptions": {
-		"baseUrl": "./",
+		"baseUrl": ".",
 		"typeRoots": [
 			"tsd"
 		],
 		"paths": {
-			"#*": [
+			":*": [
 				"npm/*"
 			],
-			"@*": [
+			";*": [
 				"tsd/*"
 			]
 		},
